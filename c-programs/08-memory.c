@@ -4,8 +4,19 @@
  *
  * (1) Explain what's wrong with this code:
  *
- * (answer)
+ * VS Code is telling me the "Grace" line is bigger than the space we've allocated in line
  *
+ * Strsep uses a double pointer
+ *  Prof. Malensek says that w/ double pointers (esp w/ strtok or strsep):
+ *      Divides string into substrings
+ *      Does stuff to start of string
+ *      Moves pointer to start of substring
+ *      Repeats w/ start of substring
+ * 
+ * So if you use strsep repeatedly on line, then try to free line,
+ *      you're only freeing the last substring
+ *      Instead, have a temp pointer for strsep, and then free both temp and line when done
+ * 
  * (2) Fix the problem.
  */
 
@@ -16,11 +27,14 @@
 
 int main(void)
 {
-    char *line = malloc(sizeof(char) * 49);
+    char *line = malloc(sizeof(char) * 75);
+    char *temp = line;
     strcpy(line, "Well, Grace she's gone, she's a half-written poem");
 
+
     while (true) {
-        char *token = strsep(&line, " ");
+        
+        char *token = strsep(&temp, " ");
         if (token == NULL) {
             break;
         }
@@ -28,7 +42,9 @@ int main(void)
     }
 
     free(line);
-
+    free(temp);
+    line = NULL;
+    
     return 0;
 }
 

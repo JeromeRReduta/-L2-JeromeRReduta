@@ -3,7 +3,11 @@
  *
  * (1) Explain what's wrong with this code:
  *
- * (answer)
+ * word1 is not good
+ *  - 4 chars of memory given, but "Hello" is 5 chars long
+ *  - Still needs a NUL terminator, so actually needs 6 chars in array
+ *  - Just add a string literal instead of doing it letter by letter
+ *      Also allows you to use implicit size
  *
  * (2) Fix the problem.
  */
@@ -12,12 +16,7 @@
 
 int main(void)
 {
-    char word1[4];
-    word1[0] = 'H';
-    word1[1] = 'e';
-    word1[2] = 'l';
-    word1[3] = 'l';
-    word1[4] = 'o';
+    char word1[] = "Hello";
 
     char word2[] = "World";
 

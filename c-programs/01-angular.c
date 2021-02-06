@@ -8,8 +8,13 @@
  *
  * (1) Explain what's wrong with this code:
  *
- * (answer)
- *
+ * *a is never given memory - should use malloc or char array
+ * 
+ * Regardless of whether a is a pointer or a char[], can't just assign a 
+ *   to a string - have to initialize it that way or change it letter by letter I guess
+ * 
+ * why use 66 instead of 'B' - not necessary but no
+ * 
  * (2) Fix the problem.
  */
 
@@ -17,9 +22,8 @@
 
 int main(void)
 {
-     char *a;
-     a = "ANGULAR";
-     *a = 66;
+     char a[20] = "ANGULAR";
+     *a = 'B';
      printf("%s\n", a);
      return 0;
 }

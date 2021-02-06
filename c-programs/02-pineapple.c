@@ -6,8 +6,12 @@
  *
  * (1) Explain what's wrong with this code:
  *
- * (answer)
+ * pointers should be set to memory addresses (i.e. malloc or arrays), not string literals
+ * 
+ * Warning from compiler - function shouldn't return address of a local variable
  *
+ * char buf[] is unitialized - instead, can init w/ char buf[128] = ""
+ * 
  * (2) Fix the problem.
  */
 
@@ -16,16 +20,24 @@
 #include <string.h>
 
 char *pineapple(char *input) {
-    char buf[128];
+    char buf[128] = "";
     strcpy(buf, input);
+
+    printf("BUF:\t%s\n", buf);
+
     strcat(buf, "Pineapple");
-    return buf;
+    strcpy(input, buf);
+
+    return input;
 }
 
 int main(void)
 {
-    char *str = "Pen";
+    
+    char str[20] = "Pen";
     char *result = pineapple(str);
+
+
     printf("%s\n", result);
 
     return 0;

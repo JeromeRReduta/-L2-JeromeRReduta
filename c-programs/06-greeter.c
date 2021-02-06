@@ -4,17 +4,18 @@
  *
  * (1) Explain what's wrong with this code:
  *
- * (answer)
+ * *name and *age should be given memory (name can just be an array)
  *
  * (2) Fix the problem.
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(void)
 {
-    char *name;
-    int *age;
+    char name[100];
+    int *age = malloc(sizeof(int));
     printf("Please enter your name: ");
     scanf("%s", name);
     printf("Please enter your age: ");
